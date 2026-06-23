@@ -5,11 +5,13 @@ import plotly.express as px
 # 1. ตั้งค่าหน้าเว็บให้เป็นแบบเต็มจอ
 st.set_page_config(page_title="Sales Dashboard", layout="wide")
 
-# 2. ดึงข้อมูลจากไฟล์ Excel โดยตรง (แม่นยำที่สุด)
-@st.cache_data
+# 2. ฟังก์ชันดึงข้อมูลจาก Google Sheets ด้วยรูปแบบเฉพาะที่ถูกต้อง
+@st.cache_data(ttl=5) # เคลียร์แคชทุกๆ 5 วินาทีเพื่อให้เห็นผลทันใจตอนเปลี่ยนเลข
 def load_data():
-    df = pd.read_excel("sales_data.xlsx")
-    df.columns = df.columns.str.strip() # ล้างช่องว่างในชื่อคอลัมน์
+    # ดึงข้อมูลผ่านแชร์รูปแบบกูเกิลสเปรดชีตโดยตรง
+    url = "https://google.com"
+    df = pd.read_csv(url)
+    df.columns = df.columns.str.strip() # ลบเว้นวรรคหัวตาราง
     return df
 
 try:
@@ -17,12 +19,12 @@ try:
     st.title("📊 ยอดขายแดชบอร์ด (Sales Dashboard)")
     st.markdown("---")
 
-    # กำหนดคอลัมน์ให้ตรงเป๊ะกับหน้าจอ Excel ของคุณ
+    # ตั้งชื่อคอลัมน์ตามตารางจริงของคุณ
     sales_col = 'ยอดขาย'
     area_col = 'เขตพื้นที่'
     product_col = 'สินค้า'
 
-    # แปลงคอลัมน์ยอดขายให้เป็นตัวเลข
+    # ปรับแต่งชนิดข้อมูลให้เป็นตัวเลข
     df[sales_col] = pd.to_numeric(df[sales_col].astype(str).str.replace(',', ''), errors='coerce').fillna(0)
 
     total_sales = df[sales_col].sum()
@@ -50,4 +52,4 @@ try:
         st.plotly_chart(fig_pie, use_container_width=True)
 
 except Exception as e:
-    st.error(f"เกิดข้อผิดพลาดในการประมวลผล: {e}")
+    st.error(f"เกิดข้อผิดพลาดในการประมวลผลข้อมูล: {e}")
