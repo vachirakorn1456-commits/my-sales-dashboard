@@ -2,14 +2,14 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-# 1. ตั้งค่าหน้าเว็บ
+# 1. ตั้งค่าหน้าเว็บให้เป็นแบบเต็มจอ
 st.set_page_config(page_title="Sales Dashboard", layout="wide")
 
-# 2. ดึงข้อมูลจาก Google Sheets
-@st.cache_data(ttl=5)
+# 2. ดึงข้อมูลจากไฟล์ Excel โดยตรง (แม่นยำที่สุด)
+@st.cache_data
 def load_data():
-    url = "https://google.com"
-    df = pd.read_csv(url)
+    df = pd.read_excel("sales_data.xlsx")
+    df.columns = df.columns.str.strip() # ล้างช่องว่างในชื่อคอลัมน์
     return df
 
 try:
@@ -17,10 +17,10 @@ try:
     st.title("📊 ยอดขายแดชบอร์ด (Sales Dashboard)")
     st.markdown("---")
 
-    # บังคับกำหนดตำแหน่งคอลัมน์ตามลำดับตาราง (A=0, B=1, C=2, D=3)
-    product_col = df.columns[1]  # ช่อง B (สินค้า)
-    area_col = df.columns[2]     # ช่อง C (เขตพื้นที่)
-    sales_col = df.columns[3]    # ช่อง D (ยอดขาย)
+    # กำหนดคอลัมน์ให้ตรงเป๊ะกับหน้าจอ Excel ของคุณ
+    sales_col = 'ยอดขาย'
+    area_col = 'เขตพื้นที่'
+    product_col = 'สินค้า'
 
     # แปลงคอลัมน์ยอดขายให้เป็นตัวเลข
     df[sales_col] = pd.to_numeric(df[sales_col].astype(str).str.replace(',', ''), errors='coerce').fillna(0)
@@ -50,4 +50,4 @@ try:
         st.plotly_chart(fig_pie, use_container_width=True)
 
 except Exception as e:
-    st.error(f"เกิดข้อผิดพลาดในการโหลดข้อมูล: {e}")
+    st.error(f"เกิดข้อผิดพลาดในการประมวลผล: {e}")
