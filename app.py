@@ -9,6 +9,9 @@ st.set_page_config(page_title="Sales Dashboard", layout="wide")
 @st.cache_data(ttl=60)
 def load_data():
 url = "https://google.com"
+
+
+
     df = pd.read_csv(url)
     return df
 
