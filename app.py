@@ -5,13 +5,11 @@ import plotly.express as px
 # 1. ตั้งค่าหน้าเว็บให้เป็นแบบเต็มจอ
 st.set_page_config(page_title="Sales Dashboard", layout="wide")
 
-# 2. ฟังก์ชันดึงข้อมูลจาก Google Sheets ด้วยรูปแบบเฉพาะที่ถูกต้อง
-@st.cache_data(ttl=5) # เคลียร์แคชทุกๆ 5 วินาทีเพื่อให้เห็นผลทันใจตอนเปลี่ยนเลข
+# 2. ฟังก์ชันดึงข้อมูลจาก Google Sheets
+@st.cache_data(ttl=5)
 def load_data():
-    # ดึงข้อมูลผ่านแชร์รูปแบบกูเกิลสเปรดชีตโดยตรง
     url = "https://google.com"
     df = pd.read_csv(url)
-    df.columns = df.columns.str.strip() # ลบเว้นวรรคหัวตาราง
     return df
 
 try:
@@ -19,12 +17,13 @@ try:
     st.title("📊 ยอดขายแดชบอร์ด (Sales Dashboard)")
     st.markdown("---")
 
-    # ตั้งชื่อคอลัมน์ตามตารางจริงของคุณ
-    sales_col = 'ยอดขาย'
-    area_col = 'เขตพื้นที่'
-    product_col = 'สินค้า'
+    # บังคับเลือกตามตำแหน่งตาราง (ช่อง A=0, B=1, C=2, D=3) ป้องกันปัญหาชื่อคอลัมน์ภาษาไทยพิมพ์ผิด
+    date_col = df.columns[0]     # ช่อง A วันที่
+    product_col = df.columns[1]  # ช่อง B สินค้า
+    area_col = df.columns[2]     # ช่อง C เขตพื้นที่
+    sales_col = df.columns[3]    # ช่อง D ยอดขาย
 
-    # ปรับแต่งชนิดข้อมูลให้เป็นตัวเลข
+    # ปรับแต่งชนิดข้อมูลช่องยอดขายให้เป็นตัวเลข
     df[sales_col] = pd.to_numeric(df[sales_col].astype(str).str.replace(',', ''), errors='coerce').fillna(0)
 
     total_sales = df[sales_col].sum()
