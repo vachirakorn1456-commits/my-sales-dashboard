@@ -2,18 +2,21 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+# 1. ตั้งค่าหน้าเว็บให้เป็นแบบเต็มจอ (Wide mode) และใส่ชื่อหัวข้อเว็บ
 st.set_page_config(page_title="Sales Dashboard", layout="wide")
 
+# 2. ดึงข้อมูลจาก Google Sheets (เวอร์ชันแก้ไขภาษาไทยแล้ว)
 @st.cache_data(ttl=60)
 def load_data():
     sheet_id = "1BwpaZk_jtfquue-7F_LZKZbGWFfaTJoBmpe2tZK2B2A" 
-    sheet_name = "ชีต1"
-    url = f"https://google.com{sheet_id}/gviz/tq?tqx=out:csv&sheet={sheet_name}"
+    # ใช้ค่าส่งออก csv และระบุรหัสหน้าแรก (gid=0) แทนการใช้ชื่อแผ่นงานภาษาไทย
+    url = f"https://google.com{sheet_id}/export?format=csv&gid=0"
     df = pd.read_csv(url)
     return df
 
 try:
     df = load_data()
+    # หัวข้อใหญ่ของแดชบอร์ด
     st.title("📊 ยอดขายแดชบอร์ด (Sales Dashboard)")
     st.markdown("---")
 
