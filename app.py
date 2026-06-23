@@ -30,9 +30,9 @@ try:
 
     mx1, mx2 = st.columns(2)
     with mx1:
-        st.metric(label="💰 ยอดขายรวมทั้งหมด", value=f"{total_sales:,.2f} บาท")
+        st.metric(label="💰 ยอดขายรวมทั้งหมด", value=d"{total_sales:,.2f} บาท")
     with mx2:
-        st.metric(label="📦 จำนวนรายการขายทั้งหมด", value=f"{total_items:,} รายการ")
+        st.metric(label="📦 จำนวนรายการขายทั้งหมด", value=d"{total_items:,} รายการ")
 
     st.markdown("---")
     col1, col2 = st.columns(2)
