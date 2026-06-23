@@ -5,12 +5,13 @@ import plotly.express as px
 # 1. ตั้งค่าหน้าเว็บให้เป็นแบบเต็มจอ (Wide mode) และใส่ชื่อหัวข้อเว็บ
 st.set_page_config(page_title="Sales Dashboard", layout="wide")
 
-# 2. ดึงข้อมูลจาก Google Sheets (เวอร์ชันแก้ไขภาษาไทยแล้ว)
+# 2. ดึงข้อมูลจาก Google Sheets (ลิงก์ตรงและจัดย่อหน้าถูกต้อง)
 @st.cache_data(ttl=60)
 def load_data():
-       url = "https://google.com"
+    url = "https://google.com"
     df = pd.read_csv(url)
     return df
+
 try:
     df = load_data()
     # หัวข้อใหญ่ของแดชบอร์ด
