@@ -2,10 +2,10 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-# 1. ตั้งค่าหน้าเว็บให้เป็นแบบเต็มจอ (Wide mode) และใส่ชื่อหัวข้อเว็บ
+# 1. ตั้งค่าหน้าเว็บให้เป็นแบบเต็มจอ (Wide mode)
 st.set_page_config(page_title="Sales Dashboard", layout="wide")
 
-# 2. ดึงข้อมูลจาก Google Sheets (ลิงก์ตรงและจัดย่อหน้าถูกต้อง)
+# 2. ดึงข้อมูลจาก Google Sheets (ลิงก์ตรง)
 @st.cache_data(ttl=60)
 def load_data():
     url = "https://google.com"
@@ -18,6 +18,7 @@ try:
     st.title("📊 ยอดขายแดชบอร์ด (Sales Dashboard)")
     st.markdown("---")
 
+    # คำนวณยอดขายรวม (เช็คหัวตารางคำว่า 'ยอดขาย')
     total_sales = df['ยอดขาย'].sum() if 'ยอดขาย' in df.columns else 0
     total_items = len(df)
 
@@ -37,7 +38,7 @@ try:
             fig_bar = px.bar(df_area, x='เขตพื้นที่', y='ยอดขาย', color='เขตพื้นที่', template='plotly_white')
             st.plotly_chart(fig_bar, use_container_width=True)
         else:
-            st.warning("ไม่พบคอลัมน์ 'เขตพื้นที่' ใน Google Sheets")
+            st.warning("ไม่พบคอลัมน์ 'เขตพื้นที่' หรือ 'ยอดขาย' ใน Google Sheets")
 
     with col2:
         st.subheader("🍕 สัดส่วนยอดขายตามประเภทสินค้า")
@@ -46,7 +47,7 @@ try:
             fig_pie = px.pie(df_product, values='ยอดขาย', names='สินค้า', hole=0.3, color_discrete_sequence=px.colors.sequential.RdBu)
             st.plotly_chart(fig_pie, use_container_width=True)
         else:
-            st.warning("ไม่พบคอลัมน์ 'สินค้า' ใน Google Sheets")
+            st.warning("ไม่พบคอลัมน์ 'สินค้า' หรือ 'ยอดขาย' ใน Google Sheets")
 
 except Exception as e:
     st.error(f"เกิดข้อผิดพลาดในการโหลดข้อมูล: {e}")
