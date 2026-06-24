@@ -14,11 +14,6 @@ def load_data():
     part3 = "/export?format=csv"
     csv_url = part1 + part2 + part3
     
-    # บรรทัดถัดไป เช่น df = pd.read_csv... ก็ต้องตรงกัน
-    
-    # บรรทัด 12 (กด Tab 1 ครั้งด้านหน้า csv_url ให้ตรงกับบรรทัด 11 และ 15)
-    csv_url = "https://" + "://google.com" + "spreadsheets/d/" + "1NPkeVcCPnQArkjrL7Wq1Gg23s3v_0WBlrv2f2nQcOrs/" + "export?format=csv"
-    
     # บรรทัด 14 (กด Tab 1 ครั้ง)
     # อ่านข้อมูลโดยบังคับให้แถวแรกเป็นชื่อคอลัมน์ (Header)
     
