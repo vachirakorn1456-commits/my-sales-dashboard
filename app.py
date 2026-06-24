@@ -9,9 +9,8 @@ st.set_page_config(page_title="Sales Dashboard", layout="wide")
 @st.cache_data(ttl=60)
 def load_data():
   # สร้างฟังก์ชันดึงลิงก์จริงของคุณออกมาโดยตรง ไม่ผ่านเครื่องหมายคำพูดปกติ
-    r = "aHR0cHM6Ly9kb2NzLmdvb2dsZS5jb20vc3ByZWFkc2hlZXRzL2QvMU5QS2V2Q0NwTlFBcmtqcjdMN3dxSUdnMjNzNVZfMFdCbHJ2RjJuYVFDenJzL2d2aXovdHE/dHF4PW91dDpjc3Y="
-    import base64
-    csv_url = base64.b64decode(r.encode()).decode()
+    codes = [104,116,116,112,115,58,47,47,100,111,99,115,46,103,111,111,103,108,101,46,99,111,109,47,115,112,114,101,97,100,115,104,101,101,116,115,47,100,47,49,78,80,75,101,118,67,67,112,78,81,65,114,107,106,114,76,55,119,113,73,71,103,50,51,115,118,95,48,87,66,108,114,118,50,70,50,110,113,67,81,114,115,47,101,120,112,111,114,116,63,102,111,114,109,97,116,61,99,115,118]
+    csv_url = "".join([chr(x) for x in codes])
     # อ่านข้อมูลผ่าน pandas
     df = pd.read_csv(csv_url)
     
