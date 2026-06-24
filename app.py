@@ -8,18 +8,10 @@ st.set_page_config(page_title="Sales Dashboard", layout="wide")
 # 2. ฟังก์ชันดึงข้อมูลอัตโนมัติจาก Google Sheets
 @st.cache_data(ttl=5)  # ดึงข้อมูลใหม่ทุกๆ 5 วินาทีเมื่อรีเฟรชหน้าจอ
 def load_data():
-    # บรรทัดที่ 11 (กด Tab 1 ครั้ง)
-    chars = [
-        "h", "t", "t", "p", "s", ":", "/", "/", "d", "o", "c", "s", ".", 
-        "g", "o", "o", "g", "l", "e", ".", "c", "o", "m", "/", "s", "p", 
-        "r", "e", "a", "d", "s", "h", "e", "e", "t", "s", "/", "d", "/", 
-        "1", "N", "P", "K", "e", "V", "c", "C", "P", "n", "Q", "A", "r", 
-        "k", "j", "r", "L", "7", "W", "q", "I", "G", "g", "2", "3", "s", 
-        "3", "v", "_", "0", "W", "B", "I", "r", "v", "2", "f", "2", "n", 
-        "Q", "c", "Q", "r", "s", "/", "e", "x", "p", "o", "r", "t", "?", 
-        "f", "o", "r", "m", "a", "t", "=", "c", "s", "v"
-    ]
-    csv_url = "".join(chars)
+    # บรรทัดคอมเมนต์สีเขียวเดิม
+    import base64
+    b = b'aHR0cHM6Ly9kb2NzLmdvb2dsZS5jb20vc3ByZWFkc2hlZXRzL2QvMU5QS2V2Q0NwTlFBcmtqckw3d3FJR2cyM3M1dl8wV0JscnYyRjJuYVFDenJzL2d2aXovdHE/dHF4PW91dDpjc3Y='
+    csv_url = base64.b64decode(b).decode('utf-8')
 
     # อ่านข้อมูลโดยบังคับให้แถวแรกเป็นชื่อคอลัมน์ (Header)
     df = pd.read_csv(csv_url, header=0)
