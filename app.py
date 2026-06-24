@@ -10,7 +10,7 @@ st.set_page_config(page_title="Sales Dashboard", layout="wide")
 def load_data():
     # บรรทัดคอมเมนต์สีเขียว (เยื้องเข้ามา 1 Tab)
     part1 = "https://google.com"
-    part2 = "1NPKevCcpNQArkj-L7wqIGg23s5v_0MB1rv2F2nqCQrs"
+    part2 = "1NPkeVcCPnQArkjrL7WqlGg23s3v_0WBlrv2f2nQcOrs"
     part3 = "/export?format=csv"
     csv_url = part1 + part2 + part3
     
