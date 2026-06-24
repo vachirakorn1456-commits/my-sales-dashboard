@@ -1,4 +1,4 @@
-Aimport streamlit as st
+import streamlit as st
 import pandas as pd
 
 # 1. ตั้งค่าหน้าเว็บให้เป็นแบบเต็มจอ
