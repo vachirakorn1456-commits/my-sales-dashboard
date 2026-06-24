@@ -1,20 +1,23 @@
-import streamlit as st
+Aimport streamlit as st
 import pandas as pd
 
 # 1. ตั้งค่าหน้าเว็บให้เป็นแบบเต็มจอ
 st.set_page_config(page_title="Sales Dashboard", layout="wide")
 
-# 2. ฟังก์ชันดึงข้อมูลจากลิงก์ SharePoint 
-@st.cache_data
+# 2. ฟังก์ชันดึงข้อมูลอัตโนมัติจาก Google Sheets
+@st.cache_data(ttl=60)  # ดึงข้อมูลใหม่ทุกๆ 1 นาทีอัตโนมัติเมื่อมีการเปิดดูหน้าเว็บ
 def load_data():
-    # นี่คือลิงก์ของคุณที่ผมแปลงเป็นตัวดาวน์โหลดตรงให้แล้วครับ
-    url = "https://sharepoint.com" 
+    # ลิงก์จาก Google Sheets ของคุณที่เปิดสิทธิ์เรียบร้อยแล้ว
+    sheet_url = "https://google.com"
     
-    # ดึงข้อมูลเข้า pandas ด้วยเอนจิน openpyxl
-    df = pd.read_excel(url, engine='openpyxl')
+    # แปลงลิงก์แชร์ให้เป็นลิงก์ดึงข้อมูลดิบ (CSV) ที่ถูกต้อง
+    csv_url = sheet_url.replace("/edit?gid=0#gid=0", "/export?format=csv")
+    
+    # ดึงข้อมูลเข้าสู่ระบบ
+    df = pd.read_csv(csv_url)
     return df
 
-# ส่วนของการแสดงผลบนหน้าเว็บแดชบอร์ด
+# ส่วนของการแสดงผลบนหน้าแดชบอร์ด
 try:
     df = load_data()
     
