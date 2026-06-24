@@ -9,9 +9,9 @@ st.set_page_config(page_title="Sales Dashboard", layout="wide")
 @st.cache_data(ttl=60)
 def load_data():
   # สร้างฟังก์ชันดึงลิงก์จริงของคุณออกมาโดยตรง ไม่ผ่านเครื่องหมายคำพูดปกติ
-    get_link = lambda: "https" + "://://google.com"
-    csv_url = get_link()
-    
+     r = "aHR0cHM6Ly9kb2NzLmdvb2dsZS5jb20vc3ByZWFkc2hlZXRzL2QvMU5QS2V2Q0NwTlFBcmtqcjdMN3dxSUdnMjNzNVZfMFdCbHJ2RjJuYVFDenJzL2d2aXovdHE/dHF4PW91dDpjc3Y="
+    import base64
+    csv_url = base64.b64decode(r.encode()).decode()
     # อ่านข้อมูลผ่าน pandas
     df = pd.read_csv(csv_url)
     
