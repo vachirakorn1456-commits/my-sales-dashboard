@@ -9,7 +9,7 @@ st.set_page_config(page_title="Sales Dashboard", layout="wide")
 @st.cache_data(ttl=5)  # ดึงข้อมูลใหม่ทุกๆ 5 วินาทีเมื่อรีเฟรชหน้าจอ
 def load_data():
     # ลิงก์ดาวน์โหลดไฟล์ดิบโดยตรงจาก Google Sheets ของคุณที่เปิดสิทธิ์และใส่ ID ที่ถูกต้องเรียบร้อยแล้ว
-    csv_url = "https://google.com"
+   csv_url = "https://" + "://google.com" + "spreadsheets/d/" + "1NPkeVcCPnQArkjrL7Wq1Gg23s3v_0WBlrv2f2nQcOrs/" + "export?format=csv"
     
     # อ่านข้อมูลโดยบังคับให้แถวแรกเป็นชื่อคอลัมน์ (Header)
     df = pd.read_csv(csv_url, header=0)
