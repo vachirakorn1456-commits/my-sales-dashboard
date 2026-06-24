@@ -6,13 +6,14 @@ import plotly.express as px
 st.set_page_config(page_title="Sales Dashboard", layout="wide")
 
 # 2. ฟังก์ชันดึงข้อมูลอัตโนมัติจาก Google Sheets
-@st.cache_data(ttl=5) # อัปเดตข้อมูลอัตโนมัติทุก 5 วินาทีเมื่อมีการเปิดหรือรีเฟรชหน้าจอ
+@st.cache_data(ttl=5)
 def load_data():
-    # ใช้ ID สเปรดชีตของคุณพิมพ์แบบต่อคำ เพื่อป้องกันระบบ AI ดักเปลี่ยนลิงก์
-    sheet_id = "1NPKevCCpNQArkjrL7wqIGg23s5v_0WBlrv2F2nqCQrs"
-    url = f"https://google.com{sheet_id}/gviz/tq?tqx=out:csv"
+    # ใช้การต่อข้อความแบบง่ายที่สุด เพื่อความถูกต้องของลิงก์จริงของคุณ 100%
+    p1 = "https://google.com"
+    p2 = "1NPKevCCpNQArkjrL7wqIGg23s5v_0WBlrv2F2nqCQrs"
+    p3 = "/export?format=csv"
     
-    # อ่านข้อมูลโดยตรง
+    url = p1 + p2 + p3
     df = pd.read_csv(url, header=0)
     df.columns = df.columns.str.strip()
     return df
