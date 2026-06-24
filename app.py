@@ -9,7 +9,10 @@ st.set_page_config(page_title="Sales Dashboard", layout="wide")
 @st.cache_data(ttl=5)  # ดึงข้อมูลใหม่ทุกๆ 5 วินาทีเมื่อรีเฟรชหน้าจอ
 def load_data():
     # บรรทัด 11 (กด Tab 1 ครั้งด้านหน้าคอมเมนต์)
-    # ลิงก์ดาวน์โหลดไฟล์ดิบโดยตรงจาก Google Sheets...
+  part1 = "https://google.com"
+    part2 = "1NPKevCcpNQArkj-L7wqIGg23s5v_0MB1rv2F2nqCQrs"
+    part3 = "/export?format=csv"
+    csv_url = part1 + part2 + part3
     
     # บรรทัด 12 (กด Tab 1 ครั้งด้านหน้า csv_url ให้ตรงกับบรรทัด 11 และ 15)
     csv_url = "https://" + "://google.com" + "spreadsheets/d/" + "1NPkeVcCPnQArkjrL7Wq1Gg23s3v_0WBlrv2f2nQcOrs/" + "export?format=csv"
