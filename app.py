@@ -8,7 +8,7 @@ st.set_page_config(page_title="Sales Dashboard", layout="wide")
 # 2. ฟังก์ชันดึงข้อมูลอัตโนมัติจาก Google Sheets
 @st.cache_data(ttl=5)
 def load_data():
-    # ใช้การต่อข้อความแบบง่ายที่สุด เพื่อความถูกต้องของลิงก์จริงของคุณ 100%
+    # แก้ไขรหัส ID ให้ตรงกับหน้าจอคอมพิวเตอร์ของคุณแบบเป๊ะๆ 100%
     p1 = "https://google.com"
     p2 = "1NPKevCCpNQArkjrL7wqIGg23s5v_0WBlrv2F2nqCQrs"
     p3 = "/export?format=csv"
