@@ -8,9 +8,9 @@ st.set_page_config(page_title="Sales Dashboard", layout="wide")
 # 2. ดึงข้อมูลจากไฟล์ Excel โดยตรง (แม่นยำ 100%)
 @st.cache_data
 def load_data():
-     url = "https://sharepoint.com" \
+    url = "https://sharepoint.com" \
               "vachirakorn_yaram_vy_g-sanden_com/W5fffed296e22345f29fcaca21fc53409e?download=1"
-           df = pd.read_excel(url)
+        df = pd.read_excel(url)
     df.columns = df.columns.str.strip() # ล้างช่องว่างหัวตาราง
     return df
 
