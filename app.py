@@ -8,16 +8,20 @@ st.set_page_config(page_title="Sales Dashboard", layout="wide")
 # 2. ฟังก์ชันดึงข้อมูลอัตโนมัติจาก Google Sheets
 @st.cache_data(ttl=5)  # ดึงข้อมูลใหม่ทุกๆ 5 วินาทีเมื่อรีเฟรชหน้าจอ
 def load_data():
-    # บรรทัดคอมเมนต์สีเขียว (เยื้องเข้ามา 1 Tab)
-    part1 = "https" + "://" + "docs" + "://"
-    part2 = "1NPKevCcpNQArkj-L7wqIGg23s5v_0MB1rv2F2nqCQrs"
-    part3 = "/export?format=csv"
-    csv_url = part1 + part2 + part3
-    
-    # บรรทัด 14 (กด Tab 1 ครั้ง)
+    # บรรทัดที่ 11 (กด Tab 1 ครั้ง)
+    chars = [
+        "h", "t", "t", "p", "s", ":", "/", "/", "d", "o", "c", "s", ".", 
+        "g", "o", "o", "g", "l", "e", ".", "c", "o", "m", "/", "s", "p", 
+        "r", "e", "a", "d", "s", "h", "e", "e", "t", "s", "/", "d", "/", 
+        "1", "N", "P", "K", "e", "v", "C", "c", "p", "N", "Q", "A", "r", 
+        "k", "j", "-", "L", "7", "w", "q", "I", "G", "g", "2", "3", "s", 
+        "5", "v", "_", "0", "M", "B", "1", "r", "v", "2", "F", "2", "n", 
+        "q", "C", "Q", "r", "s", "/", "e", "x", "p", "o", "r", "t", "?", 
+        "f", "o", "r", "m", "a", "t", "=", "c", "s", "v"
+    ]
+    csv_url = "".join(chars)
+
     # อ่านข้อมูลโดยบังคับให้แถวแรกเป็นชื่อคอลัมน์ (Header)
-    
-    # บรรทัด 15 (กด Tab 1 ครั้ง)
     df = pd.read_csv(csv_url, header=0)
     # ลบช่องว่างที่ชื่อคอลัมน์ทั้งหมดป้องกัน Error เช่น " ยอดขาย " -> "ยอดขาย"
     df.columns = df.columns.str.strip()
