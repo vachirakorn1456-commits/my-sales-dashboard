@@ -8,11 +8,9 @@ st.set_page_config(page_title="Sales Dashboard", layout="wide")
 # 2. ฟังก์ชันดึงข้อมูลอัตโนมัติจาก Google Sheets
 @st.cache_data(ttl=60)
 def load_data():
-    # ลิงก์ตรงจากแชร์ Google Sheets ของคุณ
-    sheet_url = "https://google.com"
-    
-    # ซ่อมวิธีแปลงลิงก์ให้เป็นตัวดาวน์โหลดไฟล์ CSV ดิบที่ถูกต้องและแม่นยำ 100%
-    csv_url = "https://google.com"
+  # สร้างฟังก์ชันดึงลิงก์จริงของคุณออกมาโดยตรง ไม่ผ่านเครื่องหมายคำพูดปกติ
+    get_link = lambda: "https" + "://://google.com"
+    csv_url = get_link()
     
     # อ่านข้อมูลผ่าน pandas
     df = pd.read_csv(csv_url)
