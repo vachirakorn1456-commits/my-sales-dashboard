@@ -8,12 +8,17 @@ st.set_page_config(page_title="Sales Dashboard", layout="wide")
 # 2. ฟังก์ชันดึงข้อมูลอัตโนมัติจาก Google Sheets
 @st.cache_data(ttl=5)  # ดึงข้อมูลใหม่ทุกๆ 5 วินาทีเมื่อรีเฟรชหน้าจอ
 def load_data():
-    # ลิงก์ดาวน์โหลดไฟล์ดิบโดยตรงจาก Google Sheets ของคุณที่เปิดสิทธิ์และใส่ ID ที่ถูกต้องเรียบร้อยแล้ว
-   csv_url = "https://" + "://google.com" + "spreadsheets/d/" + "1NPkeVcCPnQArkjrL7Wq1Gg23s3v_0WBlrv2f2nQcOrs/" + "export?format=csv"
+    # บรรทัด 11 (กด Tab 1 ครั้งด้านหน้าคอมเมนต์)
+    # ลิงก์ดาวน์โหลดไฟล์ดิบโดยตรงจาก Google Sheets...
     
+    # บรรทัด 12 (กด Tab 1 ครั้งด้านหน้า csv_url ให้ตรงกับบรรทัด 11 และ 15)
+    csv_url = "https://" + "://google.com" + "spreadsheets/d/" + "1NPkeVcCPnQArkjrL7Wq1Gg23s3v_0WBlrv2f2nQcOrs/" + "export?format=csv"
+    
+    # บรรทัด 14 (กด Tab 1 ครั้ง)
     # อ่านข้อมูลโดยบังคับให้แถวแรกเป็นชื่อคอลัมน์ (Header)
-    df = pd.read_csv(csv_url, header=0)
     
+    # บรรทัด 15 (กด Tab 1 ครั้ง)
+    df = pd.read_csv(csv_url, header=0)
     # ลบช่องว่างที่ชื่อคอลัมน์ทั้งหมดป้องกัน Error เช่น " ยอดขาย " -> "ยอดขาย"
     df.columns = df.columns.str.strip()
     
